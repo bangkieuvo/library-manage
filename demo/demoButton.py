@@ -2,18 +2,18 @@ import tkinter as tk
 from PIL import Image, ImageTk
 def button_clicked(n):
     for i in range(n):
-        print("Button clicked!")
+        print("button clicked!" + str(i+1))
 
 root = tk.Tk()
-root.geometry("5000x5000")
+root.geometry("900x1000")
 root.title("Demo button")
 # Creating a button with specified options
-image = Image.open("../picture/book.jpeg")  # Đường dẫn đến ảnh
+image = Image.open("book.jpeg")  # Đường dẫn đến ảnh
 resized_image = image.resize((275, 183))  # Thay đổi kích thước nếu cần
 img = ImageTk.PhotoImage(resized_image)
 button = tk.Button(root, 
                    image = img,
-                   text="Click Me", 
+                   text="clicke me!", 
                    command=lambda:button_clicked(7),
                    compound="bot",
                    activebackground="blue", 

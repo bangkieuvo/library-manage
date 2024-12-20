@@ -3,7 +3,7 @@ import sqlite3
 # 1. Tạo cơ sở dữ liệu và bảng
 def create_table():
     # Kết nối đến cơ sở dữ liệu (tạo mới nếu chưa có)
-    conn = sqlite3.connect('example2.db')
+    conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
 
     # Tạo bảng users nếu chưa tồn tại
@@ -24,7 +24,7 @@ def create_table():
 # 2. Thêm dữ liệu vào bảng
 def insert_data():
     # Kết nối đến cơ sở dữ liệu
-    conn = sqlite3.connect('example2.db')
+    conn = sqlite3.connect('example.db')
     cursor = conn.cursor()
 
     # Thêm một số dữ liệu vào bảng users
@@ -118,11 +118,11 @@ def fetch_data_with_condition():
 
 # Chạy các ví dụ
 if __name__ == "__main__":
-    create_table()
-    insert_data()
+    # create_table()
+    # insert_data()
+    # fetch_data()
+    # update_data()
+    # fetch_data()
+    # delete_data()
     fetch_data()
-    update_data()
-    fetch_data()
-    delete_data()
-    fetch_data()
-    fetch_data_with_condition()
+    # fetch_data_with_condition()
