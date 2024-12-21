@@ -1,2 +1,2 @@
 import sqlite3
-conn = sqlite3.connect("../database/library-manage.db")
+conn = sqlite3.connect("../library-manage.db")
