@@ -3,11 +3,14 @@ import sqlite3
 
 conn = sqlite3.connect("../library-manage.db")
 cursor = conn.cursor()
-sql_file = open("setup.sql","r")
-sql = sql_file.read()
-for statement in sql.split(";"):
-	cursor.execute(statement)
-	print(statement)
+def setup():
+	listSetUp = ["setupTable.sql","setupData.sql"]
+	for fileName in listSetUp:
+		sql_file = open(fileName,"r")
+		sql = sql_file.read()
+		for statement in sql.split(";"):
+			cursor.execute(statement)
+			print(statement)
 def deleteTable(name):
 	sql = f"""DROP TABLE IF EXISTS {name} """
 	conn = sqlite3.connect("../library-manage.db")
@@ -19,4 +22,5 @@ def deleteAllTable():
 	tableList = query.fetchall()
 	for table in tableList:
 		deleteTable(table[0])
+setup()
 #deleteAllTable()
