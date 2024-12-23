@@ -1,14 +1,16 @@
-INSERT or ignore INTO user (ID, name, userName, password) VALUES
-(1, 'Alice', 'alice01', 1234),
-(2, 'Bob', 'bob02', 2345),
-(3, 'Charlie', 'charlie03', 3456),
-(4, 'David', 'david04', 4567),
-(5, 'Eve', 'eve05', 5678),
-(6, 'Frank', 'frank06', 6789),
-(7, 'Grace', 'grace07', 7890),
-(8, 'Hannah', 'hannah08', 8901),
-(9, 'Ivy', 'ivy09', 9012),
-(10, 'Jack', 'jack10', 12345);
+INSERT or ignore INTO user (ID, name, userName, hashedPassword) VALUES
+(1, 'Alice', 'alice01', 4911055567749929105),
+(2, 'Bob', 'bob02', 4911055567749929105),
+(3, 'Charlie', 'charlie03', 4911055567749929105),
+(4, 'David', 'david04', 4911055567749929105),
+(5, 'Eve', 'eve05', 4911055567749929105),
+(6, 'Frank', 'frank06', 4911055567749929105),
+(7, 'Grace', 'grace07', 4911055567749929105),
+(8, 'Hannah', 'hannah08', 4911055567749929105),
+(9, 'Ivy', 'ivy09', 4911055567749929105),
+(10, 'Jack', 'jack10', 4911055567749929105),
+(15, 'Vo Bang Kieu', 'vbk1212', 4911055567749929105),
+(20, 'Tran Huynh Thien', 'thientranhhh', 4911055567749929105);
 
 INSERT or ignore INTO category (id, name, describtion) VALUES
 (1, 'Fiction', 'Books with fictional stories'),
@@ -35,8 +37,8 @@ INSERT or ignore INTO book (bookCode, name, categoryId, quantity) VALUES
 (10, 'The Chef’s Table', 10, 14);
 
 INSERT or ignore INTO administrator (id, userId) VALUES
-(1, 1),
-(2, 2);
+(1, 15),
+(2, 20);
 
 
 commit;

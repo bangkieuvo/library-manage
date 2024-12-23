@@ -1,6 +1,9 @@
 class User:
-	def __init__(self,id,name,userName,):
+	def __init__(self,id,name,userName,hashedPassword):
 		self.id = id
 		self.name = name
 		self.userName = userName
-	def isAdmin(self):
+		self.hashedPassword = hashedPassword
+
+
+	

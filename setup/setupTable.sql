@@ -3,7 +3,7 @@ CREATE TABLE if not exists user(
 	id integer PRIMARY KEY not null,
 	name varchar(255) not null,
 	userName varchar(255) not null,
-	password integer not null
+	hashedPassword integer not null
 );
 CREATE TABLE if not exists category(
 	id integer primary key not null,
