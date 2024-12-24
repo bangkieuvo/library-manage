@@ -1,16 +1,16 @@
 INSERT or ignore INTO user (ID, name, userName, hashedPassword) VALUES
-(1, 'Alice', 'alice01', 4911055567749929105),
-(2, 'Bob', 'bob02', 4911055567749929105),
-(3, 'Charlie', 'charlie03', 4911055567749929105),
-(4, 'David', 'david04', 4911055567749929105),
-(5, 'Eve', 'eve05', 4911055567749929105),
-(6, 'Frank', 'frank06', 4911055567749929105),
-(7, 'Grace', 'grace07', 4911055567749929105),
-(8, 'Hannah', 'hannah08', 4911055567749929105),
-(9, 'Ivy', 'ivy09', 4911055567749929105),
-(10, 'Jack', 'jack10', 4911055567749929105),
-(15, 'Vo Bang Kieu', 'vbk1212', 4911055567749929105),
-(20, 'Tran Huynh Thien', 'thientranhhh', 4911055567749929105);
+(1, 'Alice', 'alice01', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(2, 'Bob', 'bob02', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(3, 'Charlie', 'charlie03', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(4, 'David', 'david04', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(5, 'Eve', 'eve05', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(6, 'Frank', 'frank06', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(7, 'Grace', 'grace07', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(8, 'Hannah', 'hannah08', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(9, 'Ivy', 'ivy09', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(10, 'Jack', 'jack10', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(15, 'Vo Bang Kieu', 'vbk1212', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
+(20, 'Tran Huynh Thien', 'thientranhhh', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92');
 
 INSERT or ignore INTO category (id, name, describtion) VALUES
 (1, 'Fiction', 'Books with fictional stories'),
@@ -24,7 +24,7 @@ INSERT or ignore INTO category (id, name, describtion) VALUES
 (9, 'Education', 'Educational books'),
 (10, 'Cooking', 'Cookbooks and recipes');
 
-INSERT or ignore INTO book (bookCode, name, categoryId, quantity) VALUES
+INSERT or ignore INTO book (id, name, categoryId, quantity) VALUES
 (1, 'The Great Gatsby', 1, 15),
 (2, 'Physics Fundamentals', 2, 20),
 (3, 'World War II', 3, 10),
@@ -36,9 +36,10 @@ INSERT or ignore INTO book (bookCode, name, categoryId, quantity) VALUES
 (9, 'Mathematics for Beginners', 9, 25),
 (10, 'The Chef’s Table', 10, 14);
 
-INSERT or ignore INTO administrator (id, userId) VALUES
-(1, 15),
-(2, 20);
+INSERT or ignore INTO administrator (id) VALUES
+(1),
+(15),
+(20);
 
 
 commit;
