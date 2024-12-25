@@ -18,5 +18,12 @@ class Book:
 class Administrator:
 	def __init__(self,id):
 		self.id = id
+class BorrowedBook:
+	def __init__(self,id,userId,bookId,borrowDate,isReturned):
+		self.id = id
+		self.userId = userId
+		self.bookId = bookId
+		self.borrowDate = borrowDate
+		self.isReturned = isReturned
 
 	

@@ -2,11 +2,6 @@ import sqlite3
 from model import*
 
 class UserDAO:	
-	def isExist(self,id):
-		user = self.find(id)
-		if user != None:
-			return True
-		return False
 	def find(self,id):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
@@ -185,6 +180,63 @@ class BookDAO:
 		conn.close()
 		print(f"book with id = {book.id} is saved!")
 
+class BorrowedBookDAO:
+	def find(self,id):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"select* from borrowedBook where id = \'{id}\'"
+		cursor.execute(statement)
+		result = cursor.fetchone()
+		conn.close()
+		if result != None:
+			return BorrowedBook(*result)
+		return None
+	def findByUserId(self,userId):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"select* from borrowedBook where userId = \'{userId}\'"
+		cursor.execute(statement)
+		result = cursor.fetchall()
+		conn.close()
+		listBorrowedBook = []
+		for borrowedBook in result:
+			listBorrowedBook.append(BorrowedBook(*borrowedBook))
+		return listBorrowedBook
+	def findBorrowingByUserId(self,userId):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"select* from borrowedBook where userId = \'{userId}\' and isReturned = False"
+		cursor.execute(statement)
+		result = cursor.fetchall()
+		conn.close()
+		listBorrowedBook = []
+		for borrowedBook in result:
+			listBorrowedBook.append(BorrowedBook(*borrowedBook))
+		return listBorrowedBook
+	def findAll(self):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = "select* from borrowedBook"
+		cursor.execute(statement)
+		result = cursor.fetchall()
+		conn.close()
+		listBorrowedBook = []
+		for borrowedBook in result:
+			listBorrowedBook.append(BorrowedBook(*borrowedBook))
+		return listBorrowedBook
+	def save(self,book):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = "insert or replace into book values " + str(tuple(vars(book).values()))
+		cursor.execute(statement)
+		conn.commit()
+		conn.close()
+		print(f"book with id = {book.id} is saved!")
 
 
 

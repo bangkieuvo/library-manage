@@ -3,6 +3,8 @@ class UserService:
 	def __init__(self):
 		self.dao = UserDAO()
 		return
+	def isExist(self,id):
+		return self.dao.find(id)
 	def find(self,id):
 		dao = self.dao
 		return dao.find(id)

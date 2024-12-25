@@ -8,8 +8,4 @@ def login(userName,password):
 	if u.hashedPassword == tool.encrypt(password):
 		return u
 
-u = login("vbk1212","123456")
-if u != None:
-	print(vars(u))
-else:
-	print("login Fail!")
+ 
