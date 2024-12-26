@@ -34,7 +34,7 @@ INSERT or ignore INTO book (id, name, categoryId, quantity) VALUES
 (7, 'Steve Jobs Biography', 7, 5),
 (8, 'Healthy Living', 8, 18),
 (9, 'Mathematics for Beginners', 9, 25),
-(10, 'The Chef’s Table', 10, 14);
+(10, 'The Chef’s Table', 10, 1);
 
 INSERT or ignore INTO administrator (id) VALUES
 (1),

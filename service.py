@@ -84,3 +84,21 @@ class BookService:
 	def removeById(self,id):
 		dao = self.dao
 		dao.remove(id)
+class BorrowedBookService:
+	def __init__(self):
+		self.dao = BorrowedBookDAO()
+	def find(self,id):
+		dao = self.dao
+		return dao.find(id)
+	def checkBorrowing(self,userId, bookId):
+		dao = self.dao
+		return dao.checkBorrowing(userId,bookId)
+	def findHistory(self,userId):
+		dao = self.dao
+		return dao.findByUserId(userId)
+	def findBorrowingList(self,userId):
+		dao = self.dao
+		return dao.findByUserId(userId,isReturned = False)
+	def save(self,borrowedBook):
+		dao = self.dao
+		dao.save(borrowedBook)

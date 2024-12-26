@@ -3,9 +3,7 @@ CREATE TABLE if not exists user(
 	id integer PRIMARY KEY,
 	name varchar(255) not null,
 	userName varchar(255) not null,
-	hashedPassword varchar(255) not null,
-	deposit integer
-
+	hashedPassword varchar(255) not null
 );
 CREATE table if not exists administrator(
 	id integer primary key,

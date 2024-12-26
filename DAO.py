@@ -192,23 +192,27 @@ class BorrowedBookDAO:
 		if result != None:
 			return BorrowedBook(*result)
 		return None
-	def findByUserId(self,userId):
+	def checkBorrowing(self,userId,bookId):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
 		cursor.execute("PRAGMA foreign_keys = ON;")
-		statement = f"select* from borrowedBook where userId = \'{userId}\'"
+		statement = f"""select* from borrowedBook where userId = \'{userId}\' 
+		and bookId = \'{bookId}\' and isReturned = False"""
 		cursor.execute(statement)
-		result = cursor.fetchall()
+		result = cursor.fetchone()
 		conn.close()
-		listBorrowedBook = []
-		for borrowedBook in result:
-			listBorrowedBook.append(BorrowedBook(*borrowedBook))
-		return listBorrowedBook
-	def findBorrowingByUserId(self,userId):
+		print(statement)
+		if result != None:
+			return True
+		return False 
+	def findByUserId(self,userId,isReturned = None):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
 		cursor.execute("PRAGMA foreign_keys = ON;")
-		statement = f"select* from borrowedBook where userId = \'{userId}\' and isReturned = False"
+		if isReturned != None:
+			statement = f"select* from borrowedBook where userId = \'{userId}\' and isReturned = {isReturned}"
+		else:
+			statement = f"select* from borrowedBook where userId = \'{userId}\'"
 		cursor.execute(statement)
 		result = cursor.fetchall()
 		conn.close()
@@ -228,15 +232,15 @@ class BorrowedBookDAO:
 		for borrowedBook in result:
 			listBorrowedBook.append(BorrowedBook(*borrowedBook))
 		return listBorrowedBook
-	def save(self,book):
+	def save(self,borrowedBook):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
 		cursor.execute("PRAGMA foreign_keys = ON;")
-		statement = "insert or replace into book values " + str(tuple(vars(book).values()))
+		statement = "insert or replace into borrowedBook (userId, bookId, borrowDate, isReturned) values " + str(tuple(vars(borrowedBook).values())[1:])
 		cursor.execute(statement)
 		conn.commit()
 		conn.close()
-		print(f"book with id = {book.id} is saved!")
+		print(statement)
 
 
 
