@@ -1,14 +1,4 @@
-from DAO import *
-from model import *
-from service import *
-import tool
+from function import *
 
-def printList(l):
-	for object in l:
-		print(tuple(vars(object).values()))
-
-
-
-
-
-
+u = login("vbk1212","123456")
+borrowBook(u,10,4)

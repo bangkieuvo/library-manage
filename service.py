@@ -91,14 +91,22 @@ class BorrowedBookService:
 		dao = self.dao
 		return dao.find(id)
 	def checkBorrowing(self,userId, bookId):
-		dao = self.dao
-		return dao.checkBorrowing(userId,bookId)
+		borrowedBook = self.findBorrowingBook(userId,bookId)
+		if borrowedBook != None:
+			return True
+		return False
 	def findHistory(self,userId):
 		dao = self.dao
 		return dao.findByUserId(userId)
+	def findBorrowingBook(self,userId,bookId):
+		dao = self.dao
+		return dao.findBorrowingBook(userId,bookId)
 	def findBorrowingList(self,userId):
 		dao = self.dao
 		return dao.findByUserId(userId,isReturned = False)
 	def save(self,borrowedBook):
 		dao = self.dao
+		if borrowedBook.id != None:
+			dao.update(borrowedBook)
+			return
 		dao.save(borrowedBook)

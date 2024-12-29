@@ -178,7 +178,6 @@ class BookDAO:
 		cursor.execute(statement)
 		conn.commit()
 		conn.close()
-		print(f"book with id = {book.id} is saved!")
 
 class BorrowedBookDAO:
 	def find(self,id):
@@ -192,19 +191,18 @@ class BorrowedBookDAO:
 		if result != None:
 			return BorrowedBook(*result)
 		return None
-	def checkBorrowing(self,userId,bookId):
+	def findBorrowingBook(self,userId,bookId):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
 		cursor.execute("PRAGMA foreign_keys = ON;")
 		statement = f"""select* from borrowedBook where userId = \'{userId}\' 
 		and bookId = \'{bookId}\' and isReturned = False"""
 		cursor.execute(statement)
-		result = cursor.fetchone()
+		borrowedBook = cursor.fetchone()
 		conn.close()
-		print(statement)
-		if result != None:
-			return True
-		return False 
+		if borrowedBook != None:
+			return BorrowedBook(*borrowedBook)
+		return None
 	def findByUserId(self,userId,isReturned = None):
 		conn = sqlite3.connect("library-manage.db")
 		cursor = conn.cursor()
@@ -237,6 +235,14 @@ class BorrowedBookDAO:
 		cursor = conn.cursor()
 		cursor.execute("PRAGMA foreign_keys = ON;")
 		statement = "insert or replace into borrowedBook (userId, bookId, borrowDate, isReturned) values " + str(tuple(vars(borrowedBook).values())[1:])
+		cursor.execute(statement)
+		conn.commit()
+		conn.close()
+	def update(self,borrowedBook):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = "insert or replace into borrowedBook values " + str(tuple(vars(borrowedBook).values()))
 		cursor.execute(statement)
 		conn.commit()
 		conn.close()
