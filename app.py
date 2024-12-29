@@ -1,0 +1,161 @@
+import tkinter as tk
+from tkinter import messagebox
+from service import *
+from datetime import datetime
+from function import *
+# Initialize the main window
+root = tk.Tk()
+root.title("Library Management System")
+
+# Set the window size
+root.geometry("600x600")
+
+
+userSession = None
+def login_user():
+    username = entry_username.get()
+    password = entry_password.get()
+    user = login(username, password)
+    userSession = user 
+    if user:
+        messagebox.showinfo("Login Success", "Welcome " + user.name)
+        if isAdmin(user):
+            show_admin_dashboard(user)
+        else:
+            show_user_dashboard(user)
+    else:
+        messagebox.showerror("Login Failed", "Invalid username or password")
+
+def show_user_dashboard(user):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text="Welcome " + user.name, font=("Arial", 20)).pack(pady=20)
+    
+    # Borrowing History and Borrowing List
+    tk.Button(root, text="View Borrowing History", command=lambda: show_borrowing_history(user), width=30, height=2).pack(pady=10)
+    tk.Button(root, text="View Borrowing List", command=lambda: show_borrowing_list(user), width=30, height=2).pack(pady=10)
+    tk.Button(root, text="Edit Name", command=lambda: edit_user_name(user), width=30, height=2).pack(pady=10)
+    tk.Button(root, text="Logout", command=logout, width=30, height=2).pack(pady=20)
+
+# Function to show the admin dashboard
+def show_admin_dashboard(user):
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text="Admin Dashboard", font=("Arial", 20)).pack(pady=20)
+    
+    # Admin can add/edit books and users
+    tk.Button(root, text="Add New Book", command=add_new_book, width=30, height=2).pack(pady=10)
+    tk.Button(root, text="View All Books", command=view_all_books, width=30, height=2).pack(pady=10)
+    tk.Button(root, text="Manage Users", command=manage_users, width=30, height=2).pack(pady=10)
+    
+    # Admin can assist normal users with borrowing and returning books
+    tk.Button(root, text="Assist with Borrowing Books", command=assist_borrowing, width=30, height=2).pack(pady=10)
+    # Logout button
+    tk.Button(root, text="Logout", command=logout, width=30, height=2).pack(pady=20)
+# Function to show the borrowing history
+def show_borrowing_history(user):
+    borrowed_books = getBorrowHistory(user.id)
+    bookService = BookService()
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text=f"Borrowing History for {user.name}", font=("Arial", 20)).pack(pady=20)
+    
+    for book in borrowed_books:
+        status = "Returned" if book.isReturned else "Not Returned"
+        tk.Label(root, text=f"{book.bookId} - {bookService.find(book.bookId).name} - {status} - Borrowed on {book.borrowDate}", font=("Arial", 14)).pack(pady=5)
+
+    tk.Button(root, text="Back", command=lambda: show_user_dashboard(user), width=30, height=2).pack(pady=20)
+
+# Function to show the borrowing list (current borrowed books)
+def show_borrowing_list(user):
+    borrowed_books = getBorrowingList(user.id)
+    bookService = BookService()
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text=f"Current Borrowing List for {user.name}", font=("Arial", 20)).pack(pady=20)
+    
+    for book in borrowed_books:
+        if not book.isReturned:
+            tk.Label(root, text=f"{book.bookId} - {bookService.find(book.bookId).name} - Borrowed on {book.borrowDate}", font=("Arial", 14)).pack(pady=5)
+
+    tk.Button(root, text="Back", command=lambda: show_user_dashboard(user), width=30, height=2).pack(pady=20)
+
+# Function to edit user name
+def edit_user_name(user):
+    def save_name():
+        new_name = entry_new_name.get()
+        user.name = new_name
+        # Call function to update the name in the database
+        userService = UserService()
+        userService.save(user)
+        messagebox.showinfo("Name Updated", f"Your name has been updated to {new_name}")
+        show_user_dashboard(user)
+
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text="Edit Your Name", font=("Arial", 20)).pack(pady=20)
+    tk.Label(root, text="New Name:", font=("Arial", 14)).pack(pady=10)
+    entry_new_name = tk.Entry(root, font=("Arial", 14))
+    entry_new_name.pack(pady=10)
+    tk.Button(root, text="Save", command=save_name, width=30, height=2).pack(pady=10)
+    tk.Button(root, text="Back", command=lambda: show_user_dashboard(user), width=30, height=2).pack(pady=10)
+
+# Function to borrow a book (for users, handled by admin)
+def assist_borrowing():
+    pass  # Admin can assist normal users in borrowing books
+
+# Function to add a new book (admin action)
+def add_new_book():
+    pass  # Implement the functionality to add a new book to the database
+
+# Function to view all books (admin action)
+def view_all_books():
+    books = getAllBook()
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text="All Books in the Library", font=("Arial", 20)).pack(pady=20)
+    
+    for book in books:
+        tk.Label(root, text=f"{book.name} | Quantity: {book.quantity}", font=("Arial", 14)).pack(pady=5)
+
+    tk.Button(root, text="Back", command=lambda: show_admin_dashboard(userSession), width=30, height=2).pack(pady=20)
+
+# Function to manage users (admin action)
+def manage_users():
+    pass  # Admin can add/edit/delete users
+
+# Function to log out and return to login screen
+def logout():
+    global userSession
+    userSession = None
+    for widget in root.winfo_children():
+        widget.destroy()
+
+    tk.Label(root, text="Username", font=("Arial", 14)).pack(pady=10)
+    entry_username = tk.Entry(root, font=("Arial", 14))
+    entry_username.pack(pady=10)
+
+    tk.Label(root, text="Password", font=("Arial", 14)).pack(pady=10)
+    entry_password = tk.Entry(root, show="*", font=("Arial", 14))
+    entry_password.pack(pady=10)
+
+    tk.Button(root, text="Login", command=login_user, width=30, height=2).pack(pady=20)
+
+# Login Screen
+tk.Label(root, text="Username", font=("Arial", 14)).pack(pady=10)
+entry_username = tk.Entry(root, font=("Arial", 14))
+entry_username.pack(pady=10)
+
+tk.Label(root, text="Password", font=("Arial", 14)).pack(pady=10)
+entry_password = tk.Entry(root, show="*", font=("Arial", 14))
+entry_password.pack(pady=10)
+
+tk.Button(root, text="Login", command=login_user, width=30, height=2).pack(pady=20)
+
+root.mainloop()

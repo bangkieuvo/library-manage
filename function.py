@@ -10,9 +10,9 @@ def isAdmin(user):
 	return False
 
 #Các tác vụ dành cho tài khoản admin
-#input: user và mã sách muốn mượn
+#input: userId và mã sách muốn mượn
 #output: True nếu mượn thành công, False nếu thất bại
-def borrowBook(user,userId,bookId):
+def borrowBook(userId,bookId):
 	bookService = BookService()
 	borrowedBookService = BorrowedBookService()
 	book = bookService.find(bookId)
@@ -25,6 +25,22 @@ def borrowBook(user,userId,bookId):
 		borrowedBookService.save(borrowedBook)
 		return True
 	return False
+#input: useId và mã sách cần trả
+def returnBook(userId,bookId):
+	userService = UserService()
+	bookService = BookService()
+	borrowedBookService = BorrowedBookService()
+	user = userService.find(userId)
+	book = bookService.find(bookId)
+	borrowedBookList = getBorrowingList(user.id)
+	borrowedBook = borrowedBookService.findBorrowingBook(user.id,bookId)
+	if borrowedBook != None and book != None:
+		print(vars(borrowedBook))
+		borrowedBook.isReturned = True
+		book.quantity += 1
+		bookService.save(book)
+		borrowedBookService.save(borrowedBook)
+
 
 #input: userName và password 
 #output: object user nếu đăng nhập thành công, None nếu đăng nhập thất bại 
@@ -35,35 +51,17 @@ def login(userName,password):
 		return None
 	if user.hashedPassword == tool.encrypt(password):
 		return user
-
 #input: user và mã sách cần check 
 #output: True nếu user đang mượn cuốn sách đó chưa trả, các trường hợp khác trả về False 
-def checkBorrowing(user,bookId):
+def checkBorrowing(userId,bookId):
 	borrowedBookService = BorrowedBookService()
-	return borrowedBookService.checkBorrowing(user.id,bookId)
+	return borrowedBookService.checkBorrowing(userId,bookId)
 
 #input: user 
 #output: danh sách các sách mà user đang mượn
-def getBorrowingList(user):
+def getBorrowingList(userId):
 	service = BorrowedBookService()
-	return service.findBorrowingList(user.id)
-
-
-
-#input: user và mã sách cần trả
-def returnBook(user,bookId):
-	bookService = BookService()
-	borrowedBookService = BorrowedBookService()
-	book = bookService.find(bookId)
-	borrowedBookList = getBorrowingList(user)
-	borrowedBook = borrowedBookService.findBorrowingBook(user.id,bookId)
-	if borrowedBook != None and book != None:
-		print(vars(borrowedBook))
-		borrowedBook.isReturned = True
-		book.quantity += 1
-		bookService.save(book)
-		borrowedBookService.save(borrowedBook)
-
+	return service.findBorrowingList(userId)
 #output: danh sách tất cả các cuốn sách trong thư viện
 def getAllBook():
 	bookService = BookService()
@@ -76,6 +74,9 @@ def getAllBookAvailable():
 def getAllCategory():
 	categoryService = CategoryService()
 	return categoryService.findAll()
+def getBorrowHistory(userId):
+	borrowedBookService = BorrowedBookService()
+	return borrowedBookService.findHistory(userId)
 
 
  
