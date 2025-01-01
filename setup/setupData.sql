@@ -82,3 +82,37 @@ VALUES
 
 
 commit;
+
+
+
+INSERT INTO Books (BookName, CategoryID, Quantity) VALUES
+    ('Lập trình Python', 4, 15),
+    ('Thơ ca Việt Nam', 15, 20),
+    ('Lịch sử thế giới', 3, 10),
+    ('Kinh tế vi mô', 5, 12),
+    ('Tâm lý học hành vi', 6, 18),
+    ('Nghệ thuật tranh sơn dầu', 8, 8),
+    ('Giáo dục hiện đại', 13, 25),
+    ('Toán học cơ bản và nâng cao', 2, 22),
+    ('Lịch sử Việt Nam', 3, 13),
+    ('Giáo trình huấn luyện sức mạnh', 11, 11),
+    ('Học tiếng Anh cơ bản', 14, 30),
+    ('Thơ Hàn Mặc Tử', 15, 17),
+    ('Y học cổ truyền', 10, 5),
+    ('Chuyên đề văn học', 1, 21),
+    ('Trái đất và vũ trụ', 2, 18),
+    ('Nhạc cổ điển', 9, 7),
+    ('Công nghệ blockchain', 4, 9),
+    ('Tâm lý trẻ em', 6, 16),
+    ('Nghệ thuật sân khấu', 8, 10),
+    ('Văn học dân gian', 1, 23),
+    ('Thế giới động vật', 2, 14),
+    ('Du lịch Việt Nam', 12, 8),
+    ('Học tiếng Pháp', 14, 12),
+    ('Kinh tế toàn cầu', 5, 15),
+    ('Vật lý cơ bản', 2, 19),
+    ('Kỹ thuật lập trình', 4, 22),
+    ('Thơ hiện đại', 15, 10),
+    ('Triết học phương Tây', 7, 9),
+    ('Y học hiện đại', 10, 11),
+    ('Văn học phương Tây', 1, 13);
