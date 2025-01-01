@@ -12,17 +12,22 @@ INSERT or ignore INTO user (ID, name, userName, hashedPassword) VALUES
 (15, 'Vo Bang Kieu', 'vbk1212', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92'),
 (20, 'Tran Huynh Thien', 'thientranhhh', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92');
 
-INSERT or ignore INTO category (id, name, describtion) VALUES
-(1, 'Fiction', 'Books with fictional stories'),
-(2, 'Science', 'Books about science topics'),
-(3, 'History', 'Historical books'),
-(4, 'Technology', 'Books about technology'),
-(5, 'Art', 'Books about art and design'),
-(6, 'Travel', 'Travel guides and stories'),
-(7, 'Biography', 'Biographical books'),
-(8, 'Health', 'Books about health and wellness'),
-(9, 'Education', 'Educational books'),
-(10, 'Cooking', 'Cookbooks and recipes');
+INSERT or ignore INTO category (id, name, description) VALUES
+    (1, 'Văn học', 'Tìm hiểu về các tác phẩm văn học cổ điển và hiện đại'),
+    (2, 'Khoa học', 'Nghiên cứu các phát minh và hiện tượng tự nhiên'),
+    (3, 'Lịch sử', 'Tìm hiểu về các sự kiện và thời kỳ lịch sử'),
+    (4, 'Công nghệ thông tin', 'Kiến thức về phần mềm, phần cứng và lập trình'),
+    (5, 'Kinh tế', 'Phân tích thị trường và các lý thuyết kinh tế'),
+    (6, 'Tâm lý học', 'Nghiên cứu hành vi và tâm lý con người'),
+    (7, 'Triết học', 'Tư duy về các khái niệm cơ bản của cuộc sống'),
+    (8, 'Nghệ thuật', 'Khám phá hội họa, điêu khắc và sáng tạo nghệ thuật'),
+    (9, 'Âm nhạc', 'Tìm hiểu về nhạc lý và các thể loại âm nhạc'),
+    (10, 'Y học', 'Nghiên cứu về sức khỏe và chữa bệnh'),
+    (11, 'Thể thao', 'Tìm hiểu các môn thể thao và lợi ích sức khỏe'),
+    (12, 'Du lịch', 'Khám phá văn hóa và địa danh trên thế giới'),
+    (13, 'Giáo dục', 'Các phương pháp giảng dạy và học tập hiệu quả'),
+    (14, 'Ngoại ngữ', 'Học tập và sử dụng ngôn ngữ nước ngoài'),
+    (15, 'Thơ ca', 'Khám phá các tác phẩm thơ văn đặc sắc');
 
 INSERT or ignore INTO book (id, name, categoryId, quantity) VALUES
 (1, 'The Great Gatsby', 1, 15),

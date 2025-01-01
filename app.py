@@ -12,9 +12,7 @@ root.geometry("600x600")
 
 
 userSession = None
-def login_user():
-    username = entry_username.get()
-    password = entry_password.get()
+def login_user(username,password):
     user = login(username, password)
     userSession = user 
     if user:
@@ -147,15 +145,18 @@ def logout():
 
     tk.Button(root, text="Login", command=login_user, width=30, height=2).pack(pady=20)
 
-# Login Screen
-tk.Label(root, text="Username", font=("Arial", 14)).pack(pady=10)
-entry_username = tk.Entry(root, font=("Arial", 14))
-entry_username.pack(pady=10)
+def login_screen():
+    tk.Label(root, text="Username", font=("Arial", 14)).pack(pady=10)
+    entry_username = tk.Entry(root, font=("Arial", 14))
+    entry_username.pack(pady=10)
 
-tk.Label(root, text="Password", font=("Arial", 14)).pack(pady=10)
-entry_password = tk.Entry(root, show="*", font=("Arial", 14))
-entry_password.pack(pady=10)
+    tk.Label(root, text="Password", font=("Arial", 14)).pack(pady=10)
+    entry_password = tk.Entry(root, show="*", font=("Arial", 14))
+    entry_password.pack(pady=10)
 
-tk.Button(root, text="Login", command=login_user, width=30, height=2).pack(pady=20)
-
-root.mainloop()
+    tk.Button(root, text="Login",cursor = "hand2", 
+        command = lambda:login_user(entry_username.get(),entry_password.get()), width=30, height=2).pack(pady=20)
+def run():
+    login_screen()
+    root.mainloop()
+run()

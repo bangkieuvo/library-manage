@@ -12,7 +12,7 @@ CREATE table if not exists administrator(
 CREATE TABLE if not exists category(
 	id integer primary key,
 	name varchar(255) not null,
-	describtion varchar(255)
+	description varchar(255)
 );
 CREATE table if not exists book(
 	id integer primary key,
