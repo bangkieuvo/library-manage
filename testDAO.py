@@ -1,8 +1,8 @@
 from function import*
+from service import*
+s = CategoryService()
+o = s.find(1)
+o.haha = "kkk"
+print(type(o))
+print(vars(o))
 
-u = login("alice01","123456")
-print(borrowBook(u.id,10))
-#returnBook(u.id,6)
-print("==")
-for b in getBorrowingList(u.id):
-	print(vars(b))

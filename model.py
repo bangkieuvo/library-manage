@@ -10,9 +10,10 @@ class Category:
 		self.name = name 
 		self.description = description
 class Book:
-	def __init__(self,bookCode,name,categoryId,quantity):
+	def __init__(self,bookCode,name,author,categoryId,quantity):
 		self.id = bookCode
 		self.name = name
+		self.author = author
 		self.categoryId = categoryId
 		self.quantity = quantity 
 class Administrator:

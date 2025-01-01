@@ -17,6 +17,7 @@ CREATE TABLE if not exists category(
 CREATE table if not exists book(
 	id integer primary key,
 	name varchar(255) not null,
+	author varchar(255) not null,
 	categoryId integer,
 	quantity integer not null,
 	foreign key (categoryId) references category(id)
