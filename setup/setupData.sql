@@ -86,7 +86,7 @@ commit;
 
 
 INSERT INTO Books (BookName, CategoryID, Quantity) VALUES
-    ('Lập trình Python', 4, 15),
+    ('Lập trình Python',author here!, 4, 15),
     ('Thơ ca Việt Nam', 15, 20),
     ('Lịch sử thế giới', 3, 10),
     ('Kinh tế vi mô', 5, 12),
