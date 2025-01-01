@@ -63,13 +63,17 @@ def getBorrowingList(userId):
 	service = BorrowedBookService()
 	return service.findBorrowingList(userId)
 #output: danh sách tất cả các cuốn sách trong thư viện
-def getAllBook():
+def getBookList(page = 0):
 	bookService = BookService()
-	return bookService.findAll()
+	books = bookService.findAll()
+	if page == 0:
+		return books
+	return books[10*(page-1):10*(page-1)+10]
 #output: danh sách tất cả các cuốn sách có thể cho mượn
 def getAllBookAvailable():
 	bookService = BookService()
 	return list(filter(lambda x: x.quantity > 1, bookService.findAll()))
+
 #output: dach sách tất cả các chủ đề mà thư viện có
 def getAllCategory():
 	categoryService = CategoryService()
@@ -77,6 +81,22 @@ def getAllCategory():
 def getBorrowHistory(userId):
 	borrowedBookService = BorrowedBookService()
 	return borrowedBookService.findHistory(userId)
+def getBook(bookId):
+	bookService = BookService()
+	categoryService = CategoryService()
+	book = bookService.find(bookId)
+	if book != None:
+		book.category = categoryService.find(book.categoryId).name
+		return book
+def checkAvailableToBorrow(bookId):
+	minimumQuantityAlow = 1
+	book = getBook(bookId)
+	if book:
+		if book.quantity > minimumQuantityAlow:
+			return True
+		else:
+			return False
+	return False
 
 
  

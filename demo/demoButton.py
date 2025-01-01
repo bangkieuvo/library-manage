@@ -1,42 +1,39 @@
 import tkinter as tk
-from PIL import Image, ImageTk
-def button_clicked(n):
-    for i in range(n):
-        print("button clicked!" + str(i+1))
 
 root = tk.Tk()
-root.geometry("900x1000")
-root.title("Demo button")
-# Creating a button with specified options
-image = Image.open("book.jpeg")  # Đường dẫn đến ảnh
-resized_image = image.resize((275, 183))  # Thay đổi kích thước nếu cần
-img = ImageTk.PhotoImage(resized_image)
-button = tk.Button(root, 
-                   image = img,
-                   text="clicke me!", 
-                   command=lambda:button_clicked(7),
-                   compound="bot",
-                   activebackground="blue", 
-                   activeforeground="white",
-                   anchor="center",
-                   bd=3,
-                   bg="lightgray",
-                   cursor="hand2",
-                   disabledforeground="gray",
-                   fg="black",
-                   font=("Arial", 12),
-                   height=2,
-                   highlightbackground="black",
-                   highlightcolor="green",
-                   highlightthickness=2,
-                   justify="center",
-                   overrelief="raised",
-                   padx=10,
-                   pady=5,
-                   width=500,
-                   heigh = 400,
-                   wraplength=100)
+root.title("Scrollable List Example")
+root.geometry("300x400")
 
-button.pack(padx=20, pady=20)
+# Tạo canvas và scrollbar
+canvas = tk.Canvas(root)
+scrollbar = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
 
+# Tạo frame chứa các widget sẽ cuộn
+scrollable_frame = tk.Frame(canvas)
+
+# Cập nhật vùng cuộn khi kích thước thay đổi
+scrollable_frame.bind(
+    "<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+)
+
+# Tạo cửa sổ trong canvas để chứa frame
+canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+canvas.configure(yscrollcommand=scrollbar.set)
+
+# Đặt scrollbar vào cửa sổ
+scrollbar.pack(side="right", fill="y")
+canvas.pack(side="left", fill="both", expand=True)
+
+# Căn giữa tất cả widget trong scrollable_frame
+scrollable_frame.pack_propagate(False)  # Ngừng thay đổi kích thước tự động của frame
+scrollable_frame.grid_columnconfigure(0, weight=1, uniform="equal")
+scrollable_frame.grid_rowconfigure(0, weight=1, uniform="equal")
+
+# Thêm các widget vào scrollable_frame (danh sách widget)
+for i in range(30):
+    label = tk.Label(scrollable_frame, text=f"Item {i+1}", font=("Arial", 14))
+    label.grid(row=i, column=0, pady=5, padx=5)
+    label.grid_configure(sticky="nsew")
+
+# Đảm bảo tất cả các widget trong frame được căn giữa
 root.mainloop()
