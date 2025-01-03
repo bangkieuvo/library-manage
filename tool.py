@@ -13,6 +13,15 @@ def generateUserId():
     result = cursor.fetchone()
     conn.close()
     return result[0] + 1 
+def generateBookId():
+    import sqlite3
+    conn = sqlite3.connect("library-manage.db")
+    cursor = conn.cursor()
+    statement = f"select id from user order by id desc limit 1"
+    cursor.execute(statement)
+    result = cursor.fetchone()
+    conn.close()
+    return result[0] + 1 
 
 
 import tkinter as tk

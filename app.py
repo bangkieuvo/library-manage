@@ -54,7 +54,7 @@ def showAdminDashboard(user):
     clear()
     tk.Label(root, text="Xin chào ngài quản trị viên!", font=("Arial", 20)).pack(pady=20)    
     tk.Button(root, cursor = "hand2",  text="Tạo tài khoản khách", command=addUser, width=30, height=2).pack(pady=10)
-    tk.Button(root, cursor = "hand2",  text="Thêm sách", command=addBook, width=30, height=2).pack(pady=10)
+    #tk.Button(root, cursor = "hand2",  text="Thêm sách", command=addBook, width=30, height=2).pack(pady=10)
     tk.Button(root, cursor = "hand2",  text="Xem danh sách sách trong thư viện", command=viewAllBooks, width=30, height=2).pack(pady=10)
      
     # Admin can assist normal users with borrowing and returning books
@@ -149,7 +149,6 @@ def editUserPassword(user):
     tk.Button(root, cursor = "hand2",  text="Đổi mật khẩu", command=update, width=30, height=2).pack(pady=10)
     tk.Button(root, cursor = "hand2",  text="Back", command=lambda: showUserDashboard(userSession), width=30, height=2).pack(pady=10)
 
-def addBook()
 def assistBorrowing():
     clear()
     tk.Label(root, text="Nhập mã người mượn: ", font=("Arial", 14)).pack(pady=10)
@@ -294,8 +293,8 @@ def loginScreen():
         command = lambda:loginUser(entryUsername.get(),entryPassword.get()), width=30, height=2)
     loginButton.pack(pady=20)
 def run():
-    #loginScreen()
-    loginUser("vbk1212","123456")
+    loginScreen()
+    #loginUser("vbk1212","123456")
     root.mainloop()
 run()
 
