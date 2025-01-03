@@ -253,6 +253,58 @@ class BorrowedBookDAO:
 
 
 
-
+class ImageDAO:	
+	def find(self,id):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"select* from image where id = \'{id}\'"
+		cursor.execute(statement)
+		result = cursor.fetchone()
+		conn.close()
+		if result != None:
+			return Image(*result)
+		return None
+	def findByUserName(self,userName):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"select* from user where userName = \'{userName}\'"
+		cursor.execute(statement)
+		result = cursor.fetchone()
+		conn.close()
+		if result != None:
+			return User(*result)
+		return None
+	def findAll(self):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = "select* from user"
+		cursor.execute(statement)
+		result = cursor.fetchall()
+		conn.close()
+		listUser = []
+		for user in result:
+			listUser.append(User(*user))
+		return listUser
+	def save(self,user):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = "insert or replace into user values" + str(tuple(vars(user).values()))
+		cursor.execute(statement)
+		conn.commit()
+		conn.close()
+		print("user is saved!")
+	def remove(self,id):
+		conn = sqlite3.connect("library-manage.db")
+		cursor = conn.cursor()
+		cursor.execute("PRAGMA foreign_keys = ON;")
+		statement = f"DELETE FROM user where id = {id}"
+		cursor.execute(statement)
+		conn.commit()
+		conn.close()
+		print(f"user with id = {id} is delete!")
 
 

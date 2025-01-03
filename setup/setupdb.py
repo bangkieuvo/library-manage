@@ -23,3 +23,6 @@ def deleteAllTable():
 		deleteTable(table[0])
 setup()
 #deleteAllTable()
+
+
+conn.close()

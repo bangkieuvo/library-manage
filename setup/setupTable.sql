@@ -32,3 +32,8 @@ CREATE table if not exists borrowedBook(
     FOREIGN KEY (bookId) REFERENCES book(id) ON delete no action,
     FOREIGN KEY (userId) REFERENCES user(id) ON delete no action
 );
+CREATE table if not exists image(
+	id integer primary key AUTOINCREMENT,
+	name varchar UNIQUE not NULL,
+	data BLOB 
+);

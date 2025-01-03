@@ -26,5 +26,3 @@ class BorrowedBook:
 		self.bookId = bookId
 		self.borrowDate = borrowDate
 		self.isReturned = isReturned
-
-	
